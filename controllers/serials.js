@@ -118,7 +118,7 @@ const claimSerial = async (req, res) => {
         await serial.save();
 
         return res.status(200).json({
-            message: "Reward claimed successfully. You will recieve your reward within 24 to 48 hrs",
+            message: "Reward claimed successfully. You will receive your reward within 24 to 48 hrs",
         });
 
 
