@@ -15,8 +15,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 const allowedOrigins = [
-  "https://order-management-f-e-2-0-odrngyagc.vercel.app",
-  "https://order-management-f-e-2-0.vercel.app",
+  "https://cash-back-9hbves677-riya-patels-projects-c855bf2c.vercel.app",
+  "https://cash-back-iota.vercel.app",
   "http://localhost:3000",
 ];
 
