@@ -1,5 +1,8 @@
 const Serial = require("../models/Serial")
 const Winner = require("../models/Winner")
+const fs = require("fs")
+const fsPromises = require("fs").promises;
+const csv = require("csv-parser");
 
 // 1. Create serial numbers - CSV import
 const csvImportSerial = async (req, res) => {
@@ -21,7 +24,7 @@ const csvImportSerial = async (req, res) => {
                 }
             })
             .on('end', async () => {
-                if (serialsToInsert.length === 0) {
+                if (serialsToInsert.length === 0) {                   
                     await fsPromises.unlink(filePath);
                     return res.status(400).json({ "message": 'No valid rows with "number, price" field found.' });
                 }
@@ -141,7 +144,7 @@ const readSerials = async (req, res) => {
 
         const serials = await Serial.find(query)
             .populate("winner", "name upi")
-            .sort({ createdAt: -1 })
+            .sort({ number: 1 })
             .skip((pageNumber - 1) * limitNumber)
             .limit(limitNumber);
 
