@@ -11,7 +11,7 @@ const SerialSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["unclaimed", "claimed", "cleared"],
+    enum: ["unclaimed", "claimed", "cleared", "checked"],
     default: "unclaimed"
   },
   winner: {

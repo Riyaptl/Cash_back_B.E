@@ -66,8 +66,7 @@ const createSerial = async (req, res) => {
 const checkSerial = async (req, res) => {
     try {
         const { number } = req.body;
-        console.log(number);
-        
+
         if (!number) {
             return res.status(400).json({ message: "Serial number is required" });
         }
@@ -77,9 +76,12 @@ const checkSerial = async (req, res) => {
             return res.status(404).json({ message: "Serial not found" });
         }
 
-        if (serial.status !== "unclaimed") {
+        if (serial.status !== "unclaimed" && serial.status !== "checked") {
             return res.status(400).json({ message: "Serial cannot be claimed again." });
         }
+
+        serial.status = "checked"
+        await serial.save()
 
         return res.status(200).json({
             price: serial.price
@@ -104,7 +106,7 @@ const claimSerial = async (req, res) => {
             return res.status(404).json({ message: "Serial not found" });
         }
 
-        if (serial.status !== "unclaimed") {
+        if (serial.status !== "checked") {
             return res.status(400).json({ message: "Serial cannot be claimed again." });
         }
         serial.status = "claimed";
