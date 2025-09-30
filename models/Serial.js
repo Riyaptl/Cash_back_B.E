@@ -24,6 +24,9 @@ const SerialSchema = new mongoose.Schema({
   clearedAt: {
     type: Date
   },
+  checkedAt: {
+    type: Date
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model("Serial", SerialSchema);

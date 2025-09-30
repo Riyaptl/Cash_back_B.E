@@ -81,6 +81,7 @@ const checkSerial = async (req, res) => {
         }
 
         serial.status = "checked"
+        serial.checkedAt = new Date()
         await serial.save()
 
         return res.status(200).json({
